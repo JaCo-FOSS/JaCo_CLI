@@ -11,12 +11,12 @@ import java.net.URLConnection;
 public class DataFetcher {
     private static HttpURLConnection connection;
 
-    public void fetcher() {
+    public String fetcher(String count) {
         BufferedReader reader;
         String line;
         StringBuffer responseContent = new StringBuffer();
         try{
-            URL url = new URL("https://coronavirus-19-api.herokuapp.com/countries/India");
+            URL url = new URL("https://coronavirus-19-api.herokuapp.com/countries/"+count);
             connection = (HttpURLConnection)url.openConnection();
 
             connection.setRequestMethod("GET");
@@ -39,12 +39,12 @@ public class DataFetcher {
                 }
                 reader.close();
             }
-            System.out.println(responseContent.toString());
 
         }catch(MalformedURLException e){
             e.printStackTrace();
         }catch(IOException e){
             e.printStackTrace();
         }
+        return responseContent.toString();
     }
 }
